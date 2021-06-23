@@ -26,8 +26,15 @@ function addTask(e){
     li.className = 'collection-item';
     // Create text node and append to li
     li.appendChild(document.createTextNode(taskInput.value));
-
-    console.log(li);
+    // Create new link element
+    const link = document.createElement('a');
+    // Add class
+    link.className = 'delete-item secondary-content';
+    // Add icon html
+    link.innerHTML = '<i class="fa fa-remove"></i>';
+    // Append link to li
+    li.appendChild(link);
     
+
     e.preventDefault();
 }
