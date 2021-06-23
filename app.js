@@ -46,11 +46,29 @@ function addTask(e){
     // Append li to Ul
     taskList.appendChild(li);
 
+    // Store in LS
+    storeTaskInLocalStorage(taskInput.value);
+
     // Clear input
     taskInput.value ='';
 
 
     e.preventDefault();
+}
+
+// Store Task
+
+function storeTaskInLocalStorage(task){
+    let tasks;
+    if(localStorage.getItem('tasks') === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    }
+
+    tasks.push(task);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Remove Task
@@ -82,7 +100,7 @@ function filterTasks(e) {
     document.querySelectorAll('.collection-item').forEach(
         function(task){
             const item = task.firstChild.textContent;
-            if(item.toLowerCase().indexOf(text) != -1){
+            if(item.toLowerCase().indexOf(text) !== -1) {
                 task.style.display = 'block';
             } else {
                 task.style.display = 'none';
